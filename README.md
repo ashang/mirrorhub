@@ -44,7 +44,7 @@ All components communicate with each other via database.
 * [ ] restful API
 * [ ] UI
 
-## Roadmap (if not dream)
+## Future (if not dream)
 
 * decentralized
 * multi-CDN
