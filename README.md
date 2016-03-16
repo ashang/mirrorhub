@@ -29,6 +29,21 @@ All components communicate with each other via database.
     + restful API
     + human-friendly web interface based on restful API
 
+## Roadmap
+
+* [ ] static redirector
+* [ ] info-fetcher
+* [ ] non-configurable redirecting table generated via BGP data
+* [ ] configurable redirecting table(skip this step if above one works well)
+* [ ] easy-to-deploy check_mk client(for many distro, debian,
+  ubuntu, centos at least)(for active check)
+* [ ] deploy icinga and check_mk(for active check)
+* [ ] a reflector easy to be installed(for many distro again)(maybe a single
+  go binary)(for passive check)
+* [ ] fault tolerant based on result of passive and(or?) active check
+* [ ] restful API
+* [ ] UI
+
 ## Roadmap (if not dream)
 
 * decentralized
