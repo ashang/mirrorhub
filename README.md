@@ -2,4 +2,4 @@
 
 Redirects the user to a nearby mirror site.
 
-An instance is [mirror.moe](https://mirror.moe).
+An instance is [mirrors.moe](https://mirrors.moe).
