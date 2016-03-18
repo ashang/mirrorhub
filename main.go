@@ -11,11 +11,11 @@ import (
 )
 
 var (
-	addr  = flag.String("addr", ":8080", "address to listen")
-	route = flag.String("route", "", "JSON file to load routing table")
+	flagAddr = flag.String("addr", ":8080", "address to listen")
+	flagConf = flag.String("conf", "", "Configuration file")
 )
 
-var routing RoutingTable
+var config Config
 
 func forwardedForIP(h http.Header) string {
 	ff := h.Get("X-Forwarded-For")
@@ -30,6 +30,22 @@ func forwardedForIP(h http.Header) string {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
+	// TODO Display a homepage when Path is "" or "/"
+
+	// Find distro part (the first level in the path)
+	if r.URL.Path == "" || r.URL.Path[0] != '/' {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+
+	i := strings.IndexByte(r.URL.Path[1:], '/')
+	var distro string
+	if i == -1 {
+		distro = r.URL.Path[1:]
+	} else {
+		distro = r.URL.Path[1 : i+1]
+	}
+
 	remote := r.RemoteAddr
 	realip := remote[:strings.LastIndexByte(remote, ':')]
 
@@ -37,7 +53,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	if ipstr == "" {
 		ipstr = realip
 	}
-	mirror := routing.Route(net.ParseIP(ipstr))
+	mirror := config.FindURL(net.ParseIP(ipstr), distro)
 
 	if ipstr != realip {
 		log.Printf("%s (%s) %s %q -> %s", ipstr, realip, r.Method, r.URL, mirror)
@@ -45,37 +61,38 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		log.Printf("%s %s %q -> %s", ipstr, r.Method, r.URL, mirror)
 	}
 
-	// NOTE: We drop the query string of the original URL.
-	w.Header().Add("Location", mirror+r.URL.EscapedPath())
-	w.WriteHeader(http.StatusFound)
+	if mirror != "" {
+		// NOTE: We drop the query string of the original URL.
+		w.Header().Add("Location", mirror+r.URL.EscapedPath())
+		w.WriteHeader(http.StatusFound)
+	} else {
+		w.WriteHeader(http.StatusNotFound)
+	}
 }
 
-func loadRoutingTable(fname string) error {
+func loadConfig(fname string) error {
 	f, err := os.Open(fname)
 	if err != nil {
 		return err
 	}
 	defer f.Close()
 	decoder := json.NewDecoder(f)
-	var tab RoutingTableWithURLMap
-	err = decoder.Decode(&tab)
-	if err != nil {
-		return err
-	}
-	routing = *tab.ResolveURLMap()
-	return nil
+	return decoder.Decode(&config)
 }
 
 func main() {
 	flag.Parse()
-	if *route == "" {
-		log.Fatal("-route required")
+	if *flagConf == "" {
+		log.Fatal("-conf required")
 	}
-	err := loadRoutingTable(*route)
+	err := loadConfig(*flagConf)
 	if err != nil {
 		log.Fatal(err)
+	} else {
+		log.Println("loaded config from", *flagConf)
 	}
 
 	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe(*addr, nil))
+	log.Println("going to listen", *flagAddr)
+	log.Fatal(http.ListenAndServe(*flagAddr, nil))
 }

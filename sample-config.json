@@ -1,0 +1,73 @@
+{
+    "sites": {
+        "tuna": {
+            "url": "https://mirrors.tuna.tsinghua.edu.cn",
+            "distros": [
+                "AOSP", "CRAN", "CTAN", "OpenBSD", "anaconda", "apache",
+                "archlinux", "archlinuxarm", "archlinuxcn", "centos",
+                "chakra", "cygwin", "debian", "debian-cd",
+                "debian-multimedia", "debian-security", "deepin", "deepin-cd",
+                "docker", "dotdeb", "elrepo", "epel", "fedora", "gentoo",
+                "gentoo-portage", "gitlab-ce", "gnu", "hackage", "homebrew",
+                "ius", "kali", "kali-images", "kali-security", "kernel",
+                "kodi", "linux.git", "linuxmint", "linuxmint-cd",
+                "lxc-images", "mageia", "manjaro", "mariadb", "mongodb",
+                "msys2", "neurodebian", "nodesource", "opensuse", "openwrt",
+                "osmc", "packman", "puppy", "pypi", "qt", "raspbian",
+                "repo-ck", "rpmfusion", "sagemath", "slackware", "termux",
+                "ubuntu", "ubuntu-ports", "ubuntu-releases", "videolan-ftp"
+            ]
+        },
+        "ustc": {
+            "url": "https://mirrors.ustc.edu.cn",
+            "distros": [
+                "alpine", "anthon", "aosp", "apache", "apt.dockerproject.org",
+                "archive.raspberrypi.org", "archlinux", "archlinuxarm",
+                "archlinuxcn", "backtrack", "bioc", "bjlx", "blackarch",
+                "centos", "ceph", "chakra", "CPAN", "CRAN", "crates", "CTAN",
+                "cygwin", "cygwinports", "debian", "debian-backports",
+                "debian-cd", "debian-multimedia", "debian-security",
+                "debian-volatile", "deepin", "deepin-cd", "dotdeb", "eclipse",
+                "emdebian", "epel", "fedora", "fink", "freebsd", "gentoo",
+                "gentoo-portage", "get.docker.com", "gimp", "gnome", "gnu",
+                "homebrew-bottles", "homebrew.git", "infinality-bundle",
+                "kali", "kali-images", "kali-security", "kde",
+                "kde-application", "kernel.org", "knoppix", "knoppix-dvd",
+                "lfs", "linux-2.6.git", "linux-kernel", "linux.git",
+                "linuxmint", "linuxmint-cd", "loongson", "loongson2f",
+                "macports", "mageia", "manjaro", "mariadb",
+                "monitoring-plugins", "msys2", "neurodebian", "node",
+                "openelec", "opensuse", "openvz", "openwrt", "postgresql",
+                "puppy", "pypi", "pythonxy", "qomo", "qtproject",
+                "raspberrypi", "raspbian", "rfc", "ros", "rpmfusion", "ruby",
+                "rubygems", "rust-static", "sagemath", "salt-debian",
+                "scientificlinux", "slackware", "sourceware.org", "steamos",
+                "tdf", "tldp", "trisquel", "trisquel-images", "turnkeylinux",
+                "ubuntu", "ubuntu-cdimage", "ubuntu-old-releases",
+                "ubuntu-ports", "ubuntu-releases", "ustclug", "videolan-ftp",
+                "vim", "xbmc", "Xorg"
+            ]
+        }
+    },
+    "routes": [
+        {"ipnet": "59.66.0.0/16", "sites": ["tuna", "ustc"]},
+        {"ipnet": "101.5.0.0/16", "sites": ["tuna", "ustc"]},
+        {"ipnet": "101.6.0.0/16", "sites": ["tuna", "ustc"]},
+        {"ipnet": "166.111.0.0/16", "sites": ["tuna", "ustc"]},
+
+        {"ipnet": "114.214.160.0/19", "sites": ["ustc", "tuna"]},
+        {"ipnet": "114.214.192.0/18", "sites": ["ustc", "tuna"]},
+        {"ipnet": "202.38.64.0/19", "sites": ["ustc", "tuna"]},
+        {"ipnet": "210.45.64.0/20", "sites": ["ustc", "tuna"]},
+        {"ipnet": "210.45.112.0/20", "sites": ["ustc", "tuna"]},
+        {"ipnet": "211.86.144.0/20", "sites": ["ustc", "tuna"]},
+        {"ipnet": "222.195.64.0/19", "sites": ["ustc", "tuna"]},
+        {"ipnet": "210.72.22.0/24", "sites": ["ustc", "tuna"]},
+        {"ipnet": "202.141.160.0/20", "sites": ["ustc", "tuna"]},
+        {"ipnet": "218.22.21.0/27", "sites": ["ustc", "tuna"]},
+        {"ipnet": "218.104.71.160/28", "sites": ["ustc", "tuna"]},
+        {"ipnet": "202.141.176.0/20", "sites": ["ustc", "tuna"]},
+        {"ipnet": "121.255.0.0/16", "sites": ["ustc", "tuna"]}
+    ],
+    "default": ["ustc", "tuna"]
+}
