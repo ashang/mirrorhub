@@ -14,6 +14,13 @@ const homepageTemplate = `
 	body {
 		margin: 16px 6.25%;
 	}
+	hr {
+		border: none;
+		height: 1px;
+		color: #888;
+		background-color: #888;
+		margin: 1em 0;
+	}
 	@media screen and (min-width: 1024px) {
 		body {
 			width: 896px;
@@ -32,6 +39,10 @@ const homepageTemplate = `
 	{{ range $distro, $_ := .Distros }}
 		<a href="/{{ $distro }}">{{ $distro }}</a>
 	{{ end }}
+	<hr/>
+	<footer>
+	A <a href="https://tuna.moe">TUNA</a> project. Source code on <a href="https://github.com/tuna/mirrorhub">Github</a>.
+	</footer>
 </body>
 </html>
 `
