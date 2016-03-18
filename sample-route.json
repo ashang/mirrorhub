@@ -1,0 +1,27 @@
+{
+    "url-map": {
+        "tuna": "https://tuna.tsinghua.edu.cn",
+        "ustc": "https://ustc.edu.cn"
+    },
+    "default": "tuna",
+    "routes": [
+        {"ipnet": "59.66.0.0/16", "url": "tuna"},
+        {"ipnet": "101.5.0.0/16", "url": "tuna"},
+        {"ipnet": "101.6.0.0/16", "url": "tuna"},
+        {"ipnet": "166.111.0.0/16", "url": "tuna"},
+
+        {"ipnet": "114.214.160.0/19", "url": "ustc"},
+        {"ipnet": "114.214.192.0/18", "url": "ustc"},
+        {"ipnet": "202.38.64.0/19", "url": "ustc"},
+        {"ipnet": "210.45.64.0/20", "url": "ustc"},
+        {"ipnet": "210.45.112.0/20", "url": "ustc"},
+        {"ipnet": "211.86.144.0/20", "url": "ustc"},
+        {"ipnet": "222.195.64.0/19", "url": "ustc"},
+        {"ipnet": "210.72.22.0/24", "url": "ustc"},
+        {"ipnet": "202.141.160.0/20", "url": "ustc"},
+        {"ipnet": "218.22.21.0/27", "url": "ustc"},
+        {"ipnet": "218.104.71.160/28", "url": "ustc"},
+        {"ipnet": "202.141.176.0/20", "url": "ustc"},
+        {"ipnet": "121.255.0.0/16", "url": "ustc"}
+    ]
+}
