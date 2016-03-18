@@ -1,7 +1,7 @@
 {
     "url-map": {
-        "tuna": "https://tuna.tsinghua.edu.cn",
-        "ustc": "https://ustc.edu.cn"
+        "tuna": "https://mirrors.tuna.tsinghua.edu.cn",
+        "ustc": "https://mirrors.ustc.edu.cn"
     },
     "default": "tuna",
     "routes": [
