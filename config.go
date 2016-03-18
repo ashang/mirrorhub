@@ -10,6 +10,7 @@ type Config struct {
 	Sites   map[string]Site `json:"sites"`
 	Routes  []Route         `json:"routes"`
 	Default []string        `json:"default"`
+	distros StringSet
 }
 
 type Site struct {
@@ -17,7 +18,26 @@ type Site struct {
 	Distros StringSet `json:"distros"`
 }
 
-func (conf *Config) FindURL(ip net.IP, distro string) string {
+func (conf *Config) UnmarshalJSON(data []byte) error {
+	type Alias Config
+	err := json.Unmarshal(data, (*Alias)(conf))
+	if err != nil {
+		return err
+	}
+	// Populate conf.distros.
+	conf.distros = make(StringSet)
+	for _, site := range conf.Sites {
+		for distro := range site.Distros {
+			conf.distros.Add(distro)
+		}
+	}
+	return nil
+}
+
+func (conf *Config) FindMirrorURL(ip net.IP, distro string) string {
+	if !conf.distros.Has(distro) {
+		return ""
+	}
 	sites := conf.FindSites(ip)
 	for _, sitename := range sites {
 		site, ok := conf.Sites[sitename]
@@ -25,7 +45,7 @@ func (conf *Config) FindURL(ip net.IP, distro string) string {
 			log.Println("bad site in conf:", sitename)
 			return ""
 		}
-		if _, ok = site.Distros[distro]; ok {
+		if site.Distros.Has(distro) {
 			return site.URL
 		}
 	}
@@ -53,6 +73,15 @@ type Route struct {
 // StringSet is a set of strings, represented as a list in JSON.
 type StringSet map[string]struct{}
 
+func (ss StringSet) Add(s string) {
+	ss[s] = struct{}{}
+}
+
+func (ss StringSet) Has(s string) bool {
+	_, ok := ss[s]
+	return ok
+}
+
 func (ss StringSet) MarshalJSON() ([]byte, error) {
 	a := make([]string, 0, len(ss))
 	for s := range ss {
@@ -67,9 +96,9 @@ func (ss *StringSet) UnmarshalJSON(data []byte) error {
 	if err != nil {
 		return err
 	}
-	*ss = make(map[string]struct{}, len(a))
+	*ss = make(StringSet, len(a))
 	for _, s := range a {
-		(*ss)[s] = struct{}{}
+		ss.Add(s)
 	}
 	return nil
 }

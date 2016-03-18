@@ -53,7 +53,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	if ipstr == "" {
 		ipstr = realip
 	}
-	mirror := config.FindURL(net.ParseIP(ipstr), distro)
+	mirror := config.FindMirrorURL(net.ParseIP(ipstr), distro)
 
 	if ipstr != realip {
 		log.Printf("%s (%s) %s %q -> %s", ipstr, realip, r.Method, r.URL, mirror)
