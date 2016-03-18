@@ -7,10 +7,11 @@ import (
 )
 
 type Config struct {
-	Sites   map[string]Site `json:"sites"`
-	Routes  []Route         `json:"routes"`
-	Default []string        `json:"default"`
-	distros StringSet
+	Sites    map[string]Site `json:"sites"`
+	Routes   []Route         `json:"routes"`
+	Default  []string        `json:"default"`
+	Distros  StringSet       `json:"-"`
+	Homepage []byte          `json:"-"`
 }
 
 type Site struct {
@@ -24,18 +25,19 @@ func (conf *Config) UnmarshalJSON(data []byte) error {
 	if err != nil {
 		return err
 	}
-	// Populate conf.distros.
-	conf.distros = make(StringSet)
+	// Populate conf.distros and conf.homepage.
+	conf.Distros = make(StringSet)
 	for _, site := range conf.Sites {
 		for distro := range site.Distros {
-			conf.distros.Add(distro)
+			conf.Distros.Add(distro)
 		}
 	}
+	conf.Homepage = conf.makeHomepage()
 	return nil
 }
 
 func (conf *Config) FindMirrorURL(ip net.IP, distro string) string {
-	if !conf.distros.Has(distro) {
+	if !conf.Distros.Has(distro) {
 		return ""
 	}
 	sites := conf.FindSites(ip)

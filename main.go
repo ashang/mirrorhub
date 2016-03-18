@@ -30,20 +30,24 @@ func forwardedForIP(h http.Header) string {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	// TODO Display a homepage when Path is "" or "/"
+	path := r.URL.Path
+	if path == "" || path == "/" {
+		w.Write(config.Homepage)
+		return
+	}
 
-	// Find distro part (the first level in the path)
-	if r.URL.Path == "" || r.URL.Path[0] != '/' {
+	if path[0] != '/' {
 		w.WriteHeader(http.StatusNotFound)
 		return
 	}
 
-	i := strings.IndexByte(r.URL.Path[1:], '/')
+	// Find distro part (the first level in the path)
+	i := strings.IndexByte(path[1:], '/')
 	var distro string
 	if i == -1 {
-		distro = r.URL.Path[1:]
+		distro = path[1:]
 	} else {
-		distro = r.URL.Path[1 : i+1]
+		distro = path[1 : i+1]
 	}
 
 	remote := r.RemoteAddr
