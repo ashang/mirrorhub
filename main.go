@@ -17,8 +17,8 @@ var (
 
 var config Config
 
-func forwardedForIP(h http.Header) string {
-	ff := h.Get("X-Forwarded-For")
+func getIPOverride(h http.Header) string {
+	ff := h.Get("X-Mirrorhub-IP-Override")
 	if ff == "" {
 		return ""
 	}
@@ -53,7 +53,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	remote := r.RemoteAddr
 	realip := remote[:strings.LastIndexByte(remote, ':')]
 
-	ipstr := forwardedForIP(r.Header)
+	ipstr := getIPOverride(r.Header)
 	if ipstr == "" {
 		ipstr = realip
 	}
