@@ -7,11 +7,11 @@ import (
 )
 
 type Config struct {
-	Sites    map[string]Site `json:"sites"`
-	Routes   []Route         `json:"routes"`
-	Default  []string        `json:"default"`
-	Distros  StringSet       `json:"-"`
-	Homepage []byte          `json:"-"`
+	Sites           map[string]Site `json:"sites"`
+	Routes          []Route         `json:"routes"`
+	DefaultOrdering []string        `json:"default-ordering"`
+	Distros         StringSet       `json:"-"`
+	Homepage        []byte          `json:"-"`
 }
 
 type Site struct {
@@ -43,7 +43,7 @@ func (conf *Config) FindMirrorURL(ip net.IP, distro string) string {
 	if !conf.Distros.Has(distro) {
 		return ""
 	}
-	sites := conf.FindSites(ip)
+	sites := conf.FindOrdering(ip)
 	for _, sitename := range sites {
 		site, ok := conf.Sites[sitename]
 		if !ok {
@@ -57,22 +57,22 @@ func (conf *Config) FindMirrorURL(ip net.IP, distro string) string {
 	return ""
 }
 
-func (conf *Config) FindSites(ip net.IP) []string {
+func (conf *Config) FindOrdering(ip net.IP) []string {
 	// Quick path for invalid IP
 	if ip == nil {
-		return conf.Default
+		return conf.DefaultOrdering
 	}
 	for _, r := range conf.Routes {
 		if r.IPNet.Contains(ip) {
-			return r.Sites
+			return r.Ordering
 		}
 	}
-	return conf.Default
+	return conf.DefaultOrdering
 }
 
 type Route struct {
-	IPNet IPNet    `json:"ipnet"`
-	Sites []string `json:"sites"`
+	IPNet    IPNet    `json:"ipnet"`
+	Ordering []string `json:"ordering"`
 }
 
 // StringSet is a set of strings, represented as a list in JSON.

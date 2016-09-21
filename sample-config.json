@@ -50,24 +50,24 @@
         }
     },
     "routes": [
-        {"ipnet": "59.66.0.0/16", "sites": ["tuna", "ustc"]},
-        {"ipnet": "101.5.0.0/16", "sites": ["tuna", "ustc"]},
-        {"ipnet": "101.6.0.0/16", "sites": ["tuna", "ustc"]},
-        {"ipnet": "166.111.0.0/16", "sites": ["tuna", "ustc"]},
+        {"ipnet": "59.66.0.0/16", "ordering": ["tuna", "ustc"]},
+        {"ipnet": "101.5.0.0/16", "ordering": ["tuna", "ustc"]},
+        {"ipnet": "101.6.0.0/16", "ordering": ["tuna", "ustc"]},
+        {"ipnet": "166.111.0.0/16", "ordering": ["tuna", "ustc"]},
 
-        {"ipnet": "114.214.160.0/19", "sites": ["ustc", "tuna"]},
-        {"ipnet": "114.214.192.0/18", "sites": ["ustc", "tuna"]},
-        {"ipnet": "202.38.64.0/19", "sites": ["ustc", "tuna"]},
-        {"ipnet": "210.45.64.0/20", "sites": ["ustc", "tuna"]},
-        {"ipnet": "210.45.112.0/20", "sites": ["ustc", "tuna"]},
-        {"ipnet": "211.86.144.0/20", "sites": ["ustc", "tuna"]},
-        {"ipnet": "222.195.64.0/19", "sites": ["ustc", "tuna"]},
-        {"ipnet": "210.72.22.0/24", "sites": ["ustc", "tuna"]},
-        {"ipnet": "202.141.160.0/20", "sites": ["ustc", "tuna"]},
-        {"ipnet": "218.22.21.0/27", "sites": ["ustc", "tuna"]},
-        {"ipnet": "218.104.71.160/28", "sites": ["ustc", "tuna"]},
-        {"ipnet": "202.141.176.0/20", "sites": ["ustc", "tuna"]},
-        {"ipnet": "121.255.0.0/16", "sites": ["ustc", "tuna"]}
+        {"ipnet": "114.214.160.0/19", "ordering": ["ustc", "tuna"]},
+        {"ipnet": "114.214.192.0/18", "ordering": ["ustc", "tuna"]},
+        {"ipnet": "202.38.64.0/19", "ordering": ["ustc", "tuna"]},
+        {"ipnet": "210.45.64.0/20", "ordering": ["ustc", "tuna"]},
+        {"ipnet": "210.45.112.0/20", "ordering": ["ustc", "tuna"]},
+        {"ipnet": "211.86.144.0/20", "ordering": ["ustc", "tuna"]},
+        {"ipnet": "222.195.64.0/19", "ordering": ["ustc", "tuna"]},
+        {"ipnet": "210.72.22.0/24", "ordering": ["ustc", "tuna"]},
+        {"ipnet": "202.141.160.0/20", "ordering": ["ustc", "tuna"]},
+        {"ipnet": "218.22.21.0/27", "ordering": ["ustc", "tuna"]},
+        {"ipnet": "218.104.71.160/28", "ordering": ["ustc", "tuna"]},
+        {"ipnet": "202.141.176.0/20", "ordering": ["ustc", "tuna"]},
+        {"ipnet": "121.255.0.0/16", "ordering": ["ustc", "tuna"]}
     ],
-    "default": ["ustc", "tuna"]
+    "default-ordering": ["ustc", "tuna"]
 }

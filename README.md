@@ -20,6 +20,6 @@ It should be an object with the following members:
 
   * `ipnet`: an IP subnet in CIDR notation.
 
-  * `sites`: an ordering of site names appropriate for this subnet.
+  * `ordering`: an ordering of site names appropriate for this subnet.
 
-* `default`: the default ordering of sites.
+* `default-ordering`: the default ordering of sites.
