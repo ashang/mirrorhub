@@ -50,19 +50,24 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		distro = path[1 : i+1]
 	}
 
+	// r.RemoteAddr is IP:port; stripe the port to get IP of the requester
 	remote := r.RemoteAddr
-	realip := remote[:strings.LastIndexByte(remote, ':')]
+	reqip := remote[:strings.LastIndexByte(remote, ':')]
 
-	ipstr := getIPOverride(r.Header)
-	if ipstr == "" {
-		ipstr = realip
-	}
-	mirror := config.FindMirrorURL(net.ParseIP(ipstr), distro)
+	override := getIPOverride(r.Header)
 
-	if ipstr != realip {
-		log.Printf("%s (%s) %s %q -> %s", ipstr, realip, r.Method, r.URL, mirror)
+	var ip net.IP
+	if override == "" {
+		ip = net.ParseIP(reqip)
 	} else {
-		log.Printf("%s %s %q -> %s", ipstr, r.Method, r.URL, mirror)
+		ip = net.ParseIP(reqip)
+	}
+	mirror := config.FindMirrorURL(ip, distro)
+
+	if override == "" {
+		log.Printf("%s %s %q -> %s", reqip, r.Method, r.URL, mirror)
+	} else {
+		log.Printf("%s (%s) %s %q -> %s", override, reqip, r.Method, r.URL, mirror)
 	}
 
 	if mirror != "" {

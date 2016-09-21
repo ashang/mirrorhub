@@ -36,6 +36,9 @@ func (conf *Config) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+// FindMirrorURL finds the most suitable mirror based on the combination of
+// client IP and the distro required. If no mirror can be found for the distro,
+// an empty string is returned.
 func (conf *Config) FindMirrorURL(ip net.IP, distro string) string {
 	if !conf.Distros.Has(distro) {
 		return ""
