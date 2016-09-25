@@ -47,27 +47,39 @@
                 "ubuntu-ports", "ubuntu-releases", "ustclug", "videolan-ftp",
                 "vim", "xbmc", "Xorg"
             ]
+        },
+        "sjtug": {
+            "url": "https://mirrors.sjtug.org",
+            "distros": [
+                "archlinux", "cygwin", "vim", "putty"
+            ]
         }
     },
     "routes": [
-        {"ipnet": "59.66.0.0/16", "ordering": ["tuna", "ustc"]},
-        {"ipnet": "101.5.0.0/16", "ordering": ["tuna", "ustc"]},
-        {"ipnet": "101.6.0.0/16", "ordering": ["tuna", "ustc"]},
-        {"ipnet": "166.111.0.0/16", "ordering": ["tuna", "ustc"]},
+        {"ipnet": "59.66.0.0/16", "ordering": ["tuna", "ustc", "sjtug"]},
+        {"ipnet": "101.5.0.0/16", "ordering": ["tuna", "ustc", "sjtug"]},
+        {"ipnet": "101.6.0.0/16", "ordering": ["tuna", "ustc", "sjtug"]},
+        {"ipnet": "166.111.0.0/16", "ordering": ["tuna", "ustc", "sjtug"]},
 
-        {"ipnet": "114.214.160.0/19", "ordering": ["ustc", "tuna"]},
-        {"ipnet": "114.214.192.0/18", "ordering": ["ustc", "tuna"]},
-        {"ipnet": "202.38.64.0/19", "ordering": ["ustc", "tuna"]},
-        {"ipnet": "210.45.64.0/20", "ordering": ["ustc", "tuna"]},
-        {"ipnet": "210.45.112.0/20", "ordering": ["ustc", "tuna"]},
-        {"ipnet": "211.86.144.0/20", "ordering": ["ustc", "tuna"]},
-        {"ipnet": "222.195.64.0/19", "ordering": ["ustc", "tuna"]},
-        {"ipnet": "210.72.22.0/24", "ordering": ["ustc", "tuna"]},
-        {"ipnet": "202.141.160.0/20", "ordering": ["ustc", "tuna"]},
-        {"ipnet": "218.22.21.0/27", "ordering": ["ustc", "tuna"]},
-        {"ipnet": "218.104.71.160/28", "ordering": ["ustc", "tuna"]},
-        {"ipnet": "202.141.176.0/20", "ordering": ["ustc", "tuna"]},
-        {"ipnet": "121.255.0.0/16", "ordering": ["ustc", "tuna"]}
+        {"ipnet": "114.214.160.0/19", "ordering": ["ustc", "sjtug", "tuna"]},
+        {"ipnet": "114.214.192.0/18", "ordering": ["ustc", "sjtug", "tuna"]},
+        {"ipnet": "202.38.64.0/19", "ordering": ["ustc", "sjtug", "tuna"]},
+        {"ipnet": "210.45.64.0/20", "ordering": ["ustc", "sjtug", "tuna"]},
+        {"ipnet": "210.45.112.0/20", "ordering": ["ustc", "sjtug", "tuna"]},
+        {"ipnet": "211.86.144.0/20", "ordering": ["ustc", "sjtug", "tuna"]},
+        {"ipnet": "222.195.64.0/19", "ordering": ["ustc", "sjtug", "tuna"]},
+        {"ipnet": "210.72.22.0/24", "ordering": ["ustc", "sjtug", "tuna"]},
+        {"ipnet": "202.141.160.0/20", "ordering": ["ustc", "sjtug", "tuna"]},
+        {"ipnet": "218.22.21.0/27", "ordering": ["ustc", "sjtug", "tuna"]},
+        {"ipnet": "218.104.71.160/28", "ordering": ["ustc", "sjtug", "tuna"]},
+        {"ipnet": "202.141.176.0/20", "ordering": ["ustc", "sjtug", "tuna"]},
+        {"ipnet": "121.255.0.0/16", "ordering": ["ustc", "sjtug", "tuna"]},
+        {"ipnet": "59.78.0.0/16", "ordering": ["sjtug", "ustc", "tuna"]},
+        {"ipnet": "58.196.128.0/17", "ordering": ["sjtug", "ustc", "tuna"]},
+        {"ipnet": "202.120.0.0/16", "ordering": ["sjtug", "ustc", "tuna"]},
+        {"ipnet": "211.80.0.0/17", "ordering": ["sjtug", "ustc", "tuna"]},
+        {"ipnet": "218.193.176.0/20", "ordering": ["sjtug", "ustc", "tuna"]},
+        {"ipnet": "219.228.96.0/19", "ordering": ["sjtug", "ustc", "tuna"]}
     ],
-    "default-ordering": ["ustc", "tuna"]
+    "default-ordering": ["ustc", "tuna", "sjtug"]
 }
